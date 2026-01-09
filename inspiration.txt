@@ -1,0 +1,4 @@
+Mouse 9.5,
+Akira 1,
+Gerald 1,
+Roxy -3.5,
