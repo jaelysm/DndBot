@@ -20,7 +20,7 @@ let arr = new SlashCommandBuilder()
 					{ name: 'Add', value: 'add' },
 					{ name: 'Remove', value: 'remove' },
 				)
-				.setDescription('Set wether inspiration will be added or removed')
+				.setDescription('Set whether inspiration will be added or removed')
 				.setRequired(true)
 				.setMaxLength(6),
 		)
@@ -44,11 +44,10 @@ let arr = new SlashCommandBuilder()
 				.setRequired(true),
 		)
 	)
-	;
+;
 
-
-function readWriteSync(addOrRemove, charName, amt) {
-  var data = fs.readFileSync('inspiration.txt', 'utf-8');
+function readWriteInspiration(addOrRemove, charName, amt) {
+  var data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
   var prevAmt = newAmt = 0;
   
   let substr = data.substring(data.indexOf(charName)+charName.length+1);
@@ -63,14 +62,13 @@ function readWriteSync(addOrRemove, charName, amt) {
  
   var newValue = data.replace(charName + ' ' + prevAmt, charName + ' ' + newAmt);
 
-  fs.writeFileSync('inspiration.txt', newValue, 'utf-8');
+  fs.writeFileSync('text_files/inspiration.txt', newValue, 'utf-8');
 
-  //return data + "\n We will " + addOrRemove + " " + amt + " for " + charName;
   return "changing " + charName + "'s inspiration from " + prevAmt + " to " + newAmt + "\nNew Inspirations: \n" + newValue;
 }
 
 function readInspirations() {
-	var data = fs.readFileSync('inspiration.txt', 'utf-8');
+	var data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
 	return data;
 }
 
@@ -86,14 +84,14 @@ module.exports = {
 
         switch (subcommand) {
             case 'read':
-				reply = readInspirations()
+				reply = "Current inspiration points: \n" + readInspirations()
                 break;
             case 'edit':
-                reply = "\nInspiration:\n" + readWriteSync(interaction.options.getString('addremove'), interaction.options.getString('name'), interaction.options.getNumber('amount'))
+                reply = "\nInspiration:\n" + readWriteInspiration(interaction.options.getString('addremove'), interaction.options.getString('name'), interaction.options.getNumber('amount'))
                 break;
             default:
                 // something went wrong!
-                await interaction.reply('Unknown subcommand.');
+                await interaction.reply('Unknown subcommand. Please use \'read\' or \'edit\'.');
         }
 
 		await interaction.reply(`${reply}`);
