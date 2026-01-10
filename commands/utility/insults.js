@@ -29,6 +29,7 @@ let species = [
   'Triton',
 ];
 
+// put list of species into an array for use in the command builder
 let choicesArr = [];
 for (let i = 0; i < species.length; i++) {
 	choicesArr.push({name: species[i], value: species[i]});
@@ -42,9 +43,7 @@ let arr = new SlashCommandBuilder()
 			.setName('species')
 			.setDescription('The species to insult')
 			.setRequired(true)
-			.addChoices(
-				choicesArr
-			),
+			.addChoices(choicesArr),
 	)
 	.addNumberOption((option) =>
 		option
@@ -55,10 +54,11 @@ let arr = new SlashCommandBuilder()
 ;
 
 function readInsults(speciesInput, amount) {
-	let data = fs.readFileSync('text_files/insults/' + 'test' + '.txt', 'utf-8');
-	let parsed = JSON.parse(data);
-	let retval = parsed.find(p => p.title === speciesInput).list;
+	let data = fs.readFileSync('text_files/insults.txt', 'utf-8'); // read file
+	let parsed = JSON.parse(data); // convert json to object
+	let retval = parsed.find(p => p.title === speciesInput).list; // find list of insults for this species
 	
+	// if the user specified an amount, only show that amount, otherwise show all
 	return amount ? retval.slice(0, amount).join('\n') : retval.join('\n');
 }
 

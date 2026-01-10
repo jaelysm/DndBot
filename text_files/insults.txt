@@ -3,7 +3,7 @@
         "title" : "Aarakocra",
         "list" : [
             "Bird-Brains",
-            "Bird-Man",u
+            "Bird-Man",
             "Caw-Caws",
             "Crow",
             "Hollowbones",
@@ -377,21 +377,21 @@
     {
         "title" : "Indirect Racial Slurs",
         "list" : [
-            "A bag of leftovers from a restaurant: \"<em>An Orc-y Bag</em>\"",
-            "A dagger: \"<em>A Gnomish Greatsword</em>\"",
-            "Bad breath: \"<em>Dragonborn Singing</em>\"",
-            "Barrels of whiskey: \"<em>Dwarven Wetnurse</em>\"",
-            "Happy endings at a massage parlor: \"<em>Human Style</em>\"",
-            "Laying a dwarf or gnome: \"<em>Boulder Rolling</em>\"",
-            "Picking a lock: \"<em>Banging a Halfling's Sister</em>\"",
-            "Pickpocketing: \"<em>Halfing Handshake</em>\"",
-            "Public drunkenness: \"<em>Going Dwarven</em>\"",
-            "Stealing a horse: \"<em>Taking a Half-Orc Bride</em>\"",
-            "The act of going barefoot: \"<em>Wearing Halfling Shoes</em>\" (some stores have signs forbidding halfling shoes)",
-            "The bastard children of non-human races: \"<em>Half-Man</em>\"",
-            "Unshaven men: \"<em>Dwarf Babies</em>\"",
-            "Vegetables: \"<em>Elf Food</em>\"",
-            "Whiskey: \"<em>Dwarf Milk</em>\""
+            "A bag of leftovers from a restaurant: An Orc-y Bag",
+            "A dagger: A Gnomish Greatsword",
+            "Bad breath: Dragonborn Singing",
+            "Barrels of whiskey: Dwarven Wetnurse",
+            "Happy endings at a massage parlor: Human Style",
+            "Laying a dwarf or gnome: Boulder Rolling",
+            "Picking a lock: Banging a Halfling's Sister",
+            "Pickpocketing: Halfing Handshake",
+            "Public drunkenness: Going Dwarven",
+            "Stealing a horse: Taking a Half-Orc Bride",
+            "The act of going barefoot: Wearing Halfling Shoes (some stores have signs forbidding halfling shoes)",
+            "The bastard children of non-human races: Half-Man",
+            "Unshaven men: Dwarf Babies",
+            "Vegetables: Elf Food",
+            "Whiskey: Dwarf Milk"
         ]
     },
     {
