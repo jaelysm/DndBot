@@ -1,8 +1,31 @@
+const Discord = require("discord.js")
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
 const config = require('./config.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const { Player } = require('discord-player');
+const { DefaultExtractors } = require('@discord-player/extractor');
+
+const client = new Client({ 
+	intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ] 
+});
+
+// this is the entrypoint for discord-player based application
+const player = new Player(client);
+
+// this event is emitted whenever discord-player starts to play a track
+player.events.on('playerStart', (queue, track) => {
+  // we will later define queue.metadata object while creating the queue
+  queue.metadata.channel.send(`Started playing **${track.title}**!`);
+});
+ 
+// Now, lets load all the default extractors
+//await player.extractors.loadMulti(DefaultExtractors);
 
 client.once(Events.ClientReady, (readyClient) => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
