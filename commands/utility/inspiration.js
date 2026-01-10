@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-var fs = require('fs');
+const fs = require('fs');
 
 let arr = new SlashCommandBuilder()
 	.setName('inspiration')
@@ -47,8 +47,8 @@ let arr = new SlashCommandBuilder()
 ;
 
 function readWriteInspiration(addOrRemove, charName, amt) {
-  var data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
-  var prevAmt = newAmt = 0;
+  let data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
+  let prevAmt = newAmt = 0;
   
   let substr = data.substring(data.indexOf(charName)+charName.length+1);
   prevAmt = parseFloat(substr.substring(0,substr.indexOf(",")));
@@ -60,15 +60,15 @@ function readWriteInspiration(addOrRemove, charName, amt) {
 	  newAmt = prevAmt - amt;
   }
  
-  var newValue = data.replace(charName + ' ' + prevAmt, charName + ' ' + newAmt);
+  let newValue = data.replace(charName + ' ' + prevAmt, charName + ' ' + newAmt);
 
   fs.writeFileSync('text_files/inspiration.txt', newValue, 'utf-8');
 
-  return "changing " + charName + "'s inspiration from " + prevAmt + " to " + newAmt + "\nNew Inspirations: \n" + newValue;
+  return "Changing " + charName + "'s inspiration from " + prevAmt + " to " + newAmt + "\nNew Inspirations: \n" + newValue;
 }
 
 function readInspirations() {
-	var data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
+	let data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
 	return data;
 }
 
@@ -87,7 +87,7 @@ module.exports = {
 				reply = "Current inspiration points: \n" + readInspirations()
                 break;
             case 'edit':
-                reply = "\nInspiration:\n" + readWriteInspiration(interaction.options.getString('addremove'), interaction.options.getString('name'), interaction.options.getNumber('amount'))
+                reply = readWriteInspiration(interaction.options.getString('addremove'), interaction.options.getString('name'), interaction.options.getNumber('amount'))
                 break;
             default:
                 // something went wrong!
