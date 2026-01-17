@@ -48,11 +48,14 @@ let arr = new SlashCommandBuilder()
 
 function readWriteInspiration(addOrRemove, charName, amt) {
   let data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
-  let prevAmt = newAmt = 0;
+  let prevAmt = 0;
+  let newAmt = 0;
   
+  // get current inspiration info
   let substr = data.substring(data.indexOf(charName)+charName.length+1);
   prevAmt = parseFloat(substr.substring(0,substr.indexOf(",")));
  
+  // get new inspiration info
   if (addOrRemove == "add") {
 	  newAmt = prevAmt + amt;
   }
@@ -60,15 +63,18 @@ function readWriteInspiration(addOrRemove, charName, amt) {
 	  newAmt = prevAmt - amt;
   }
  
-  let newValue = data.replace(charName + ' ' + prevAmt, charName + ' ' + newAmt);
+  // get new values to display in pretty format
+  let newValues = data.replace(charName + ' ' + prevAmt, charName + ' ' + newAmt);
 
-  fs.writeFileSync('text_files/inspiration.txt', newValue, 'utf-8');
+  // update data in file
+  fs.writeFileSync('text_files/inspiration.txt', newValues, 'utf-8');
 
-  return "Changing " + charName + "'s inspiration from " + prevAmt + " to " + newAmt + "\nNew Inspirations: \n" + newValue;
+  return "Changing " + charName + "'s inspiration from " + prevAmt + " to " + newAmt + "\nNew Inspirations: \n" + newValues.replaceAll(',', '');
 }
 
 function readInspirations() {
-	let data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
+	// get data in pretty format
+	let data = fs.readFileSync('text_files/inspiration.txt', 'utf-8').replaceAll(',', '');
 	return data;
 }
 

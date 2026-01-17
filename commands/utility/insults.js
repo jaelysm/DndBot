@@ -57,9 +57,10 @@ function readInsults(speciesInput, amount) {
 	let data = fs.readFileSync('text_files/insults.txt', 'utf-8'); // read file
 	let parsed = JSON.parse(data); // convert json to object
 	let retval = parsed.find(p => p.title === speciesInput).list; // find list of insults for this species
+	let selectedInsults = amount ? retval.slice(0, amount) : retval; // if user input a number, only get that many insults
 	
 	// if the user specified an amount, only show that amount, otherwise show all
-	return amount ? retval.slice(0, amount).join('\n') : retval.join('\n');
+	return "Insults for " + speciesInput + ":\n" + selectedInsults.join('\n');
 }
 
 module.exports = {
