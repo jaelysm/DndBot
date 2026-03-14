@@ -10,14 +10,14 @@ To list each user's current inspiration points:
 /inspiration read
 ```
 
-To edit inspiration:
+To edit inspiration (amount is optional):
 ```
 /inspiration edit add/remove playerName amount
 ```
 
 ### Insults
 
-To list insults for a specific Dungeons & Dragons species:
+To list insults for a specific Dungeons & Dragons species (amount is optional):
 ```
 /insult speciesName amount
 ```
