@@ -1,5 +1,6 @@
 const { AttachmentBuilder, Client, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
 const fs = require('fs');
+const path = require('node:path');
 
 let arr = new SlashCommandBuilder()
 	.setName('image')
@@ -12,9 +13,15 @@ let arr = new SlashCommandBuilder()
 	)
 ;
 
-function getImage(imageName) {
-	let data = {files: ["images/" + imageName + ".png"] };
-	return data;
+function getImage(imageName, imgType) {
+	let filePath = path.join(__dirname, "../../images", imageName + imgType);
+	
+	// make sure this file actually exists before returning the file path
+	if (fs.existsSync(filePath)) {
+		return {files: ["images/" + imageName + imgType] };
+	} else {
+		return null;
+	}
 }
 
 module.exports = {
@@ -23,8 +30,22 @@ module.exports = {
 		// interaction.user is the object representing the User who ran the command
 		// interaction.member is the GuildMember object, which represents the user in the specific guild
 		
-		let reply = getImage(interaction.options.getString('imagename'));
+		let checkedImgTypes = [".png", ".jpeg", ".jpg"]
+		let reply;
+		
+		// search through valid file types until we find the picture
+		for (let i = 0; i < checkedImgTypes.length; i++) {
+			reply = getImage(interaction.options.getString('imagename'), checkedImgTypes[i]);
+			if (reply != null) {
+				break;
+			}
+		}
 
-		await interaction.reply(reply);
+		try {
+			await interaction.reply(reply);
+		}
+		catch {
+			console.log("something went wrong");
+		}
 	},
 };

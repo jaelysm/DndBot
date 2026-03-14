@@ -39,6 +39,8 @@ build/Release
 
 # Dependency directories
 images/*.png
+images/*.jpg
+images/*.jpeg
 node_modules/
 jspm_packages/
 
