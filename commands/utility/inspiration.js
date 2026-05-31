@@ -6,7 +6,7 @@ let arr = new SlashCommandBuilder()
 	.setDescription('Provides information about current inspiration stats.')
 	.addSubcommand((subcommand) =>
 		subcommand
-			.setName('read')
+			.setName('view')
 			.setDescription('Get current inspiration points for all users'),
 	)
 	.addSubcommand((subcommand) => 
@@ -29,10 +29,11 @@ let arr = new SlashCommandBuilder()
 				.setName('name')
 				.setDescription('Character\'s name')
 				.addChoices(
-					{ name: 'Mouse', value: 'Mouse' },
-					{ name: 'Akira', value: 'Akira' },
-					{ name: 'Gerald', value: 'Gerald' },
-					{ name: 'Roxy', value: 'Roxy' },
+					{ name: 'Aurelius', value: 'Aurelius' },
+					{ name: 'Jade', value: 'Jade' },
+					{ name: 'Miguel', value: 'Miguel' },
+					{ name: 'Likrix', value: 'Likrix' },
+					{ name: 'Zignial', value: 'Zignial' },
 				)
 				.setRequired(true)
 				.setMaxLength(20),
@@ -50,7 +51,7 @@ function readWriteInspiration(addOrRemove, charName, amt) {
   let data = fs.readFileSync('text_files/inspiration.txt', 'utf-8');
   let prevAmt = 0;
   let newAmt = 0;
-  
+
   // get current inspiration info
   let substr = data.substring(data.indexOf(charName)+charName.length+1);
   prevAmt = parseFloat(substr.substring(0,substr.indexOf(",")));
@@ -89,7 +90,7 @@ module.exports = {
 		const subcommand = interaction.options.getSubcommand();
 
         switch (subcommand) {
-            case 'read':
+            case 'view':
 				reply = "Current inspiration points: \n" + readInspirations()
                 break;
             case 'edit':
@@ -102,5 +103,5 @@ module.exports = {
 
 		await interaction.reply(`${reply}`);
 	},
+	readWriteInspiration
 };
-
