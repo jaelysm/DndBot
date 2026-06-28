@@ -22,7 +22,7 @@ async function handlePollResults(response, message, interaction) {
 	const collectorFilter = (i) => i.user.id === interaction.user.id;
 	
 	// message automatically times out after 60 minutes
-	const confirmation = await message.awaitMessageComponent({ filter: collectorFilter, time: 60_000 });
+	const confirmation = await message.awaitMessageComponent({ filter: collectorFilter, time: 60_000_000 });
 
 	if (confirmation.customId === 'closePoll') {
 		
@@ -52,7 +52,7 @@ async function handlePollResults(response, message, interaction) {
 		else if (winners.length === 2) {
 			console.log(`Result: It's a tie! Winners: ${winners.join(', ')} (${maxVotes} votes each)`);
 			readWriteInspiration("add", winners[0], 0.5);
-			newInspos = readWriteInspiration("add", winners[1], 0.5);
+			newInspos = `It's a tie! Winners: ${winners.join(', ')} (${maxVotes} vote(s) each)\n` + readWriteInspiration("add", winners[1], 0.5);
 		} 
 		else if (winners.length === 1) {
 			console.log(`Result: The winner is "${winners[0]}" with ${maxVotes} votes!`);
@@ -89,7 +89,7 @@ module.exports = {
 					{ text: "Miguel", emoji: "🦝" },
 					{ text: "Zignial", emoji: "🪽" },
 				],
-				allowMultiselect: false, // bool, represents whether users can pick multiple options
+				allowMultiselect: true, // bool, represents whether users can pick multiple options
 				duration: 1, // duration in hours (min 1) 
 			};
 
